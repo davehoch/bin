@@ -6,6 +6,6 @@ ps -ef | grep tomcat | grep -v grep | awk '{print $2}' | xargs kill -9
 
 # now call a shell script to delete all the log files
 echo deleting log files
-deleteTomcatLogs.sh
+./deleteTomcatLogs.sh
 
 echo done
