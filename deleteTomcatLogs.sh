@@ -1,3 +1,3 @@
 #!/bin/sh
-echo deleting log files
+echo deleting Tomcat log files
 rm -f /usr/local/Cellar/tomcat@8/8.5.54/libexec/logs/*
