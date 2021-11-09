@@ -1,13 +1,18 @@
 #!/bin/sh
 
+deleteTempFiles.sh
+
 # kerberos init for database tools
 # when the password is updated, call `kinit --keychain` to reset it
-kinit &
+echo initializing kinit
+kinit
 
 # update tldr's info
-tldr --update &
+echo updating tldr
+tldr --update
 
 # update brew's database of formulas
-brew update &
-
-deleteTempFiles.sh &
+echo updating brew
+brew doctor
+brew update
+brew cleanup
