@@ -1,0 +1,1 @@
+git branch --remote | grep -e greg -e dave | sed -e 's/^/git push -d/' -e 's/origin\//origin /' -e 's/$/; sleep 1;/'
