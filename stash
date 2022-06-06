@@ -6,10 +6,14 @@ if [[ $# -eq 0 ]]; then
     exit 0
 fi
 
-# if parameter is "." then use the current path
+# if parameter is "." then use the git remote of the current dir
 if [[ "$1" = "." ]]; then
-    val=${PWD##*/}
-    open https://stash.arbfund.com/projects/UI/repos/"$val"/browse
+    url=$(git remote --verbose | grep -E 'origin.*\(fetch\)')
+    [[ "$url" =~ .*7999/(.*)/(.*).git.* ]]
+    open https://stash.arbfund.com/projects/"${BASH_REMATCH[1]}"/repos/"${BASH_REMATCH[2]}"/browse
+
+    # at this point, we could go further and go to the current git branch
+    #https://stash.arbfund.com/projects/ACCT/repos/aws/browse?at=refs%2Fheads%2Fdave%2FFO-2186-push-early-filter-to-database
     exit 0
 fi
 
