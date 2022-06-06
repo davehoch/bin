@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# if no parameter, then just go to stash
+if [[ $# -eq 0 ]]; then
+    open https://versionmanager.arbfund.com
+    exit 1
+fi
+
+# if parameter is "." then use the current path
+if [[ "$1" = "." ]]; then
+    val=${PWD##*/}
+    open https://versionmanager.arbfund.com/#/projects/"$val"\?ac=settings
+    exit 1
+fi
+
+# else go to the path passed in
+open https://versionmanager.arbfund.com/#/projects/"$1"\?ac=settings
