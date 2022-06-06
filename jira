@@ -11,15 +11,16 @@ if [[ $# -eq 1 ]] && [[ "$1" = "." ]]; then
   CASE_NUM=$(git branch --show-current | grep -E -o '\w*-\d+')
   if [[ -n "$CASE_NUM" ]]; then
     open https://jira.arbfund.com/browse/"$CASE_NUM"
-    exit 1
+    exit 0
   fi
 fi
 
 # if an argument is passed in, then go to it
 if [[ $# -gt 0 ]]; then
   open https://jira.arbfund.com/browse/"$1"
-  exit 1
+  exit 0
 fi
 
 # punt and just open the dashboard
 open https://jira.arbfund.com/secure/Dashboard.jspa
+exit 0
