@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# if no parameters, then just go to grok
+if [[ $# -eq 0 ]]; then
+    open https://opengrok.arbfund.com/source/
+fi
+
+# if there is a parameter, then search it
+open https://opengrok.arbfund.com/source/search\?q="$1"
