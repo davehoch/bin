@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# -L - follow redirects
+# -I - headers only
+# -s - silent - don't show progress meter
+# -w - write-out - write to stdout
+val=$(curl -LI "$1" -o /dev/null -w '%{http_code}\n' -s)
+if [[ "$val" = 200 ]]; then
+    exit 0
+else
+    # return the http status code
+    exit $?
+fi
