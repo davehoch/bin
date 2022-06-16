@@ -3,17 +3,19 @@ set -e              # Exit immediately if a pipeline returns a non-zero status.
 set -u              # Treat unset variables and parameters other than the special parameters ‘@’ or ‘*’ as an error when performing parameter expansion.
 set -o pipefail     # Return value of a pipeline is the value of the last (rightmost) command to exit with a non-zero status, or zero if all commands in the pipeline exit successfully. 
 
-if [[ $# -eq 0 ]]; then
-    "$BROWSER" https://versionmanager.arbfund.com
-elif [[ "$1" = "--help" ]]; then
+if [[ $# -eq 1 ]] && [[ "$1" = "--help" ]]; then
     echo "NAME"
     echo "  versionmanager --help"
     echo "  versionmanager"
     echo "  versionmanager [project name]"
     echo "  versionmanager ."
+elif [[ $# -eq 0 ]]; then
+    "$BROWSER" https://versionmanager.arbfund.com
 elif [[ "$1" = "." ]]; then
+    # if the parameter is "." then use the name of the current directory
     val=${PWD##*/}
     "$BROWSER" https://versionmanager.arbfund.com/#/projects/"$val"\?ac=settings
 else
+    # go to the path passed in
     "$BROWSER" https://versionmanager.arbfund.com/#/projects/"$1"\?ac=settings
 fi
