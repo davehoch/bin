@@ -1,6 +1,9 @@
-#!/bin/bash
+#!/usr/bin/env bash
+set -e              # Exit immediately if a pipeline returns a non-zero status.
+set -u              # Treat unset variables and parameters other than the special parameters ‘@’ or ‘*’ as an error when performing parameter expansion.
+set -o pipefail     # Return value of a pipeline is the value of the last (rightmost) command to exit with a non-zero status, or zero if all commands in the pipeline exit successfully. 
 
-# if [[ $# -eq 1 ]] && [[ "$1" = "?" ]]; then
+# if [[ $# -eq 1 ]] && [[ "$1" = "--help" ]]; then
 #   echo "usage: jira"
 #   echo "usage: jira FO-123"
 #   echo "usage: jira ."
@@ -10,17 +13,17 @@
 if [[ $# -eq 1 ]] && [[ "$1" = "." ]]; then
   CASE_NUM=$(git branch --show-current | grep -E -o '\w*-\d+')
   if [[ -n "$CASE_NUM" ]]; then
-    open https://jira.arbfund.com/browse/"$CASE_NUM"
+    "$BROWSER" https://jira.arbfund.com/browse/"$CASE_NUM"
     exit 0
   fi
 fi
 
 # if an argument is passed in, then go to it
 if [[ $# -gt 0 ]]; then
-  open https://jira.arbfund.com/browse/"$1"
+  "$BROWSER" https://jira.arbfund.com/browse/"$1"
   exit 0
 fi
 
 # punt and just open the dashboard
-open https://jira.arbfund.com/secure/Dashboard.jspa
+"$BROWSER" https://jira.arbfund.com/secure/Dashboard.jspa
 exit 0
