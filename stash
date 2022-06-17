@@ -12,11 +12,14 @@ elif [[ $# -eq 0 ]]; then
 elif [[ "$1" = "." ]]; then
     # if parameter is "." then use the git remote of the current dir
     url=$(git remote --verbose | grep -E 'origin.*\(fetch\)')
-    [[ "$url" =~ .*7999/(.*)/(.*).git.* ]]
-    "$BROWSER" https://stash.arbfund.com/projects/"${BASH_REMATCH[1]}"/repos/"${BASH_REMATCH[2]}"/browse
+    if [[ "$url" =~ .*7999/(.*)/(.*).git.* ]]; then
+        "$BROWSER" https://stash.arbfund.com/projects/"${BASH_REMATCH[1]}"/repos/"${BASH_REMATCH[2]}"/browse
 
-    # at this point, we could go further and go to the current git branch
-    #https://stash.arbfund.com/projects/ACCT/repos/aws/browse?at=refs%2Fheads%2Fdave%2FFO-2186-push-early-filter-to-database
+        # at this point, we could go further and go to the current git branch
+        #https://stash.arbfund.com/projects/ACCT/repos/aws/browse?at=refs%2Fheads%2Fdave%2FFO-2186-push-early-filter-to-database
+    else
+        "$BROWSER" https://stash.arbfund.com
+    fi
 else
     # go to the path passed in
     "$BROWSER" https://stash.arbfund.com/projects/UI/repos/"$1"/browse
