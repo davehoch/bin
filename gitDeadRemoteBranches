@@ -4,4 +4,4 @@ set -u              # Treat unset variables and parameters other than the specia
 set -o pipefail     # Return value of a pipeline is the value of the last (rightmost) command to exit with a non-zero status, or zero if all commands in the pipeline exit successfully. 
 
 git fetch --prune
-git branch --remote --merged | grep -E --invert-match 'origin\/master' | sed -E 's/origin\//git push -d origin /' | code - &
+git branch --remote --merged | grep -E --invert-match 'origin\/master' | sed -E 's/origin\//git push -d origin /' | $EDITOR - &
