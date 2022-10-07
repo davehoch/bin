@@ -12,7 +12,7 @@ if [[ ! $# -eq 1 ]]; then
 fi
 
 # make sure it's a folder
-if [[ ! -d "$1" ]]; then
+if [[ ! -d $1 ]]; then
 	echo "blah blah 2"
 	exit 1
 fi

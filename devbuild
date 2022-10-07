@@ -3,7 +3,7 @@ set -e          # Exit immediately if a pipeline returns a non-zero status.
 set -u          # Treat unset variables and parameters other than the special parameters ‘@’ or ‘*’ as an error when performing parameter expansion.
 set -o pipefail # Return value of a pipeline is the value of the last (rightmost) command to exit with a non-zero status, or zero if all commands in the pipeline exit successfully.
 
-if [[ $# -eq 1 ]] && [[ "$1" = "." ]]; then
+if [[ $# -eq 1 ]] && [[ $1 == "." ]]; then
 	PROJECT=${PWD##*/}
 	BRANCH=$(urlencode "$(git branch --show-current)")
 
@@ -18,7 +18,7 @@ if [[ $# -eq 1 ]] && [[ "$1" = "." ]]; then
 	for URL in "${URLS[@]}"; do
 		CODE=$(urlexists "$URL")
 		echo "$CODE" -- "$URL"
-		if [[ "$CODE" = 200 ]]; then
+		if [[ $CODE == 200 ]]; then
 			"$BROWSER" "$URL"
 			exit 0
 		fi
