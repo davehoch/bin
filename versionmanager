@@ -14,8 +14,8 @@ elif [[ $# -eq 0 ]]; then
 elif [[ $1 == "." ]]; then
 	# if the parameter is "." then use the name of the current directory
 	val=${PWD##*/}
-	"$BROWSER" https://versionmanager.arbfund.com/#/projects/"$val"\?ac=settings
+	"$BROWSER" https://versionmanager.arbfund.com/#/projects/"$val"\?ac=environments
 else
 	# go to the path passed in
-	"$BROWSER" https://versionmanager.arbfund.com/#/projects/"$1"\?ac=settings
+	"$BROWSER" https://versionmanager.arbfund.com/#/projects/"$1"\?ac=environments
 fi
