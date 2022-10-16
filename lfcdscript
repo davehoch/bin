@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+set -e          # Exit immediately if a pipeline returns a non-zero status.
+set -u          # Treat unset variables and parameters other than the special parameters ‘@’ or ‘*’ as an error when performing parameter expansion.
+set -o pipefail # Return value of a pipeline is the value of the last (rightmost) command to exit with a non-zero status, or zero if all commands in the pipeline exit successfully.
+
+# This is taken from the lf homepage
+# https://sandeep.ramgolam.com/blog/lf
+# Do not run it directly.  Use something like the following, because scripts run in their own shell, so the 'cd' will have no affect.
+# alias lfcd='source lfcdscript' # this is required so that the cd command doesn't run in a subshell
+# bindkey -s '^o' 'lfcd\n'  # ctrl-O
+tmp="$(mktemp)"
+lf -last-dir-path="$tmp" "$@"
+if [ -f "$tmp" ]; then
+    dir="$(cat "$tmp")"
+    rm -f "$tmp"
+    if [ -d "$dir" ]; then
+        if [ "$dir" != "$(pwd)" ]; then
+            cd "$dir"
+        fi
+    fi
+fi
