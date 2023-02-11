@@ -3,6 +3,15 @@ set -e              # Exit immediately if a pipeline returns a non-zero status.
 set -u              # Treat unset variables and parameters other than the special parameters ‘@’ or ‘*’ as an error when performing parameter expansion.
 set -o pipefail     # Return value of a pipeline is the value of the last (rightmost) command to exit with a non-zero status, or zero if all commands in the pipeline exit successfully. 
 
+# This script makes it really easy to compress screen shots before pasting them into emails or Jira cases.
+#
+# Intended usage:
+#   In screenshot, set it to automatically save pngs to a specified folder, like ~/Downloads/screenshots.
+#   In Automator create a Folder Action that watches the folder.
+#   Add a Run Shell Script action to run the following script:
+#   ~/bin/screencompress "$@"
+#
+# https://medium.com/macoclock/how-to-make-a-workflow-to-auto-compress-the-screenshot-from-mac-and-copy-it-to-clipboard-79c1c28598db
 # https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPSystemStartup/Chapters/CreatingLaunchdJobs.html#//apple_ref/doc/uid/10000172i-SW7-SW8
 
 for FILE in "$@"
