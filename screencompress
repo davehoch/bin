@@ -6,10 +6,11 @@ set -o pipefail     # Return value of a pipeline is the value of the last (right
 # This script makes it really easy to compress screen shots before pasting them into emails or Jira cases.
 #
 # Intended usage:
-#   In screenshot, set it to automatically save pngs to a specified folder, like ~/Downloads/screenshots.
+#   OS X
+#   In the screenshot app, set it to automatically save pngs to a specified folder, like ~/Downloads/screenshots.
 #   In Automator create a Folder Action that watches the folder.
 #   Add a Run Shell Script action to run the following script:
-#   ~/bin/screencompress "$@"
+#   ~/bin/screenshotcompress "$@"
 #
 # https://medium.com/macoclock/how-to-make-a-workflow-to-auto-compress-the-screenshot-from-mac-and-copy-it-to-clipboard-79c1c28598db
 # https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPSystemStartup/Chapters/CreatingLaunchdJobs.html#//apple_ref/doc/uid/10000172i-SW7-SW8
@@ -26,5 +27,6 @@ do
 
 	/usr/local/bin/pngquant 32 --skip-if-larger --strip --ext=-min.png -- "$FILE"
 
+    # open the newly compressed file
     open "${FILE//.PNG/-min.png}"
 done
