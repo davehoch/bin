@@ -4,3 +4,11 @@ set -u          # Treat unset variables and parameters other than the special pa
 set -o pipefail # Return value of a pipeline is the value of the last (rightmost) command to exit with a non-zero status, or zero if all commands in the pipeline exit successfully.
 
 curl -LI "$1" -o /dev/null -w '%{http_code}\n' -s
+
+# --output
+# --location --include --silent --write-out
+# curl -s $STATUS_ENDPOINT | jq .status_code
+
+# RESPONSE=$(curl --write-out %{http_code} --silent --output /dev/null ${URL})
+
+# if [ $RESPONSE -ne 200 ]
