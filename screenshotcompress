@@ -12,6 +12,8 @@ set -o pipefail     # Return value of a pipeline is the value of the last (right
 #   Add a Run Shell Script action to run the following script:
 #   ~/bin/screenshotcompress "$@"
 #
+#   If things go wrong, use "Folder Actions Setup.app" to make sure folder actions are enabled.
+#
 # https://medium.com/macoclock/how-to-make-a-workflow-to-auto-compress-the-screenshot-from-mac-and-copy-it-to-clipboard-79c1c28598db
 # https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPSystemStartup/Chapters/CreatingLaunchdJobs.html#//apple_ref/doc/uid/10000172i-SW7-SW8
 
@@ -25,8 +27,9 @@ do
     # only compress PNG files
 	if [[ ! "$FILE_LOWER" =~ (\.png$) ]]; then exit; fi
 
-	/usr/local/bin/pngquant 32 --skip-if-larger --strip --ext=-min.png -- "$FILE"
+	/usr/local/bin/pngquant 128 --skip-if-larger --strip --ext=-min.png -- "$FILE"
 
     # open the newly compressed file
-    open "${FILE//.PNG/-min.png}"
+    NEW_FILE=$(echo "$FILE" | sed -E 's/\.png$/-min.png/i')
+    open "$NEW_FILE"
 done
