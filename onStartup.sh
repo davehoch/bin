@@ -8,6 +8,7 @@ deleteTempFiles.sh
 # kerberos init for database tools
 # when the password is updated, call `kinit --keychain` to reset it
 echo initializing kinit
+echo If kinit is asking for a password, call \'kinit --keychain\' to fix it
 kinit
 
 # update tldr's info
