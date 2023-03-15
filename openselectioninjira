@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+set -e              # Exit immediately if a pipeline returns a non-zero status.
+set -u              # Treat unset variables and parameters other than the special parameters ‘@’ or ‘*’ as an error when performing parameter expansion.
+set -o pipefail     # Return value of a pipeline is the value of the last (rightmost) command to exit with a non-zero status, or zero if all commands in the pipeline exit successfully. 
+
+# This script is not intended to by used from the command line.
+# It is intended to be called from a hotkey by a program like Karabiner-Elements
+
+
+origClipboardContents=$(pbpaste)
+
+# copy the currently selected text by sending a ⌘c
+osascript <<EOF 
+tell application "System Events" 
+  	keystroke "c" using command down
+end tell 
+EOF
+
+# open the selection in jira
+selection=$(pbpaste)
+open https://cwan.atlassian.net/browse/"${selection}"
+
+echo "$origClipboardContents" | pbcopy
