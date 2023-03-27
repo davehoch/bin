@@ -1,4 +1,5 @@
 # bin
+
 Contents of my ~/bin folder
 
 On macOS:
@@ -9,4 +10,5 @@ On macOS:
 * Make sure to add the execute flag to any scripts: `chmod +x myscript`
 
 # Articles and places where I stole code
+
 * [A decade of dotfiles](https://evanhahn.com/a-decade-of-dotfiles/) - especially the section on preferring scripts over aliases.
