@@ -7,14 +7,14 @@ set -o pipefail # Return value of a pipeline is the value of the last (rightmost
 # This script will move the folder to a temp directory, which is fast, and then recursively delete the folder asynchronously
 
 if [[ ! $# -eq 1 ]]; then
-	echo "blah blah 1"
-	exit 1
+  echo "blah blah 1"
+  exit 1
 fi
 
 # make sure it's a folder
 if [[ ! -d $1 ]]; then
-	echo "blah blah 2"
-	exit 1
+  echo "blah blah 2"
+  exit 1
 fi
 
 destfolder=$(mktemp -d /tmp/deleteme-rmasync-XXXXX)

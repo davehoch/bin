@@ -4,19 +4,19 @@ set -u          # Treat unset variables and parameters other than the special pa
 set -o pipefail # Return value of a pipeline is the value of the last (rightmost) command to exit with a non-zero status, or zero if all commands in the pipeline exit successfully.
 
 if [ ! $# -eq 1 ]; then
-	echo 'makesh takes one argument' 1>&2
-	exit 1
+  echo 'makesh takes one argument' 1>&2
+  exit 1
 elif [ -e "$1" ]; then
-	echo "$1 already exists" 1>&2
-	exit 1
+  echo "$1 already exists" 1>&2
+  exit 1
 fi
 
 {
-	echo '#!/usr/bin/env bash'
-	echo 'set -e              # Exit immediately if a pipeline returns a non-zero status.'
-	echo 'set -u              # Treat unset variables and parameters other than the special parameters ‘@’ or ‘*’ as an error when performing parameter expansion.'
-	echo 'set -o pipefail     # Return value of a pipeline is the value of the last (rightmost) command to exit with a non-zero status, or zero if all commands in the pipeline exit successfully. '
-	echo
+  echo '#!/usr/bin/env bash'
+  echo 'set -e              # Exit immediately if a pipeline returns a non-zero status.'
+  echo 'set -u              # Treat unset variables and parameters other than the special parameters ‘@’ or ‘*’ as an error when performing parameter expansion.'
+  echo 'set -o pipefail     # Return value of a pipeline is the value of the last (rightmost) command to exit with a non-zero status, or zero if all commands in the pipeline exit successfully. '
+  echo
 } >>"$1"
 
 chmod u+x "$1"
