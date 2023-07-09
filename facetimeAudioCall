@@ -1,0 +1,27 @@
+#!/usr/bin/osascript
+
+on run argv
+    
+    set phone_num to (item 1 of argv)
+    do shell script "open facetime-audio://" & quoted form of phone_num
+
+    # now click the 'call' button that comes up
+
+    # tell application "System Events"
+    #     repeat until (button "Call" of window 1 of application process "FaceTime" exists)
+    #         delay 1
+    #     end repeat
+    #     click button "Call" of window 1 of application process "FaceTime"
+    # end tell
+
+    # tell application "System Events" to tell process "FaceTime"
+    #    set frontmost to true
+    #    tell window 1
+    #        repeat while not (button "Call" exists)
+    #            delay 1
+    #        end repeat
+    #        click button "Call"
+    #    end tell
+    # end tell
+
+end run
