@@ -26,7 +26,7 @@ for FILE in "$@"; do
   # only compress PNG files
   if [[ ! "$FILE_LOWER" =~ (\.png$) ]]; then exit; fi
 
-  /usr/local/bin/pngquant 128 --skip-if-larger --strip --ext=-min.png -- "$FILE"
+  /opt/homebrew/bin/pngquant 128 --skip-if-larger --strip --ext=-min.png -- "$FILE"
 
   # open the newly compressed file
   NEW_FILE=$(echo "$FILE" | sed -E 's/\.png$/-min.png/i')
