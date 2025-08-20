@@ -7,10 +7,8 @@ MINS=$1
 SECONDS=$((MINS * 60))
 MESSAGE="Time Up: $MINS minute(s)"
 
-# osascript -e 'tell application "System Events" to display dialog "This is a test" with title "title"'
-    # && osascript -e "tell application 'System Events' to display dialog \"$MESSAGE\" with title \"Timer\""
-    # && osascript -e "display notification \"$MESSAGE\" with title \"Timer\"" \
+# osascript -e "display notification \"$MESSAGE\" with title \"Timer\"" \
 
-Sleep "$SECONDS" \
-    && say 'beep, beep, beep' \
-    && osascript -e 'tell application "System Events" to display dialog "This is a test" with title "title"' > /dev/null  \ &
+Sleep "$SECONDS"
+say 'beep, beep, beep' &
+osascript -e "tell application \"System Events\" to display dialog \"$MESSAGE\" with title \"Timer\"" > /dev/null &
