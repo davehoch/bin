@@ -5,10 +5,19 @@ set -o pipefail     # Return value of a pipeline is the value of the last (right
 
 MINS=$1
 SECONDS=$((MINS * 60))
-MESSAGE="Time Up: $MINS minute(s)"
+MESSAGE="Time's Up: $MINS minute(s)"
 
-# osascript -e "display notification \"$MESSAGE\" with title \"Timer\"" \
+# If there's a second parameter, use it for the title
+TITLE="Timer"
+if [ "$#" -eq 2 ]; then
+    TITLE="$2"
+fi
 
-Sleep "$SECONDS"
-say 'beep, beep, beep' &
-osascript -e "tell application \"System Events\" to display dialog \"$MESSAGE\" with title \"Timer\"" > /dev/null &
+notify() {
+  local message="$1"
+  local title="$2"
+  say 'beep, beep, beep' &
+  osascript -e "tell application \"System Events\" to display dialog \"${message}\" with title \"${title}\"" > /dev/null &
+}
+
+Sleep "$SECONDS" && notify "$MESSAGE" "$TITLE" &
