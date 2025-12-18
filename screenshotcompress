@@ -21,10 +21,10 @@ for FILE in "$@"; do
   FILE_LOWER=$(echo "$FILE" | tr '[:upper:]' '[:lower:]')
 
   # don't recompress the new file
-  if [[ "$FILE_LOWER" =~ (-min\.png$) ]]; then exit; fi
+  if [[ $FILE_LOWER =~ (-min\.png$) ]]; then exit; fi
 
   # only compress PNG files
-  if [[ ! "$FILE_LOWER" =~ (\.png$) ]]; then exit; fi
+  if [[ ! $FILE_LOWER =~ (\.png$) ]]; then exit; fi
 
   /opt/homebrew/bin/pngquant 128 --skip-if-larger --strip --ext=-min.png -- "$FILE"
 
